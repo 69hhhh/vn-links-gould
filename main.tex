@@ -1,0 +1,1876 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=30mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[nameinlink,capitalise]{cleveref}
+
+\newcommand{\kk}{\Bbbk}
+\newcommand{\hK}{\mathbb K}
+\newcommand{\ot}{\otimes}
+\newcommand{\hot}{\widehat\otimes}
+\newcommand{\tri}{\mathbin{\triangleleft}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\coev}{\operatorname{coev}}
+\newcommand{\Writhe}{\operatorname{wr}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\ao}{\mathrm{ao}}
+\newcommand{\rc}{\mathrm{rc}}
+\newcommand{\cen}{\mathrm{cen}}
+\newcommand{\rootpart}{\mathrm{root}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{The \(V_n\) Invariants as Colored Links--Gould Invariants:\\
+A Root--Center Approach}
+\author{Jiuhe Liu}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+The knot invariants \(V_n\) arise from a rank-two Nichols algebra and a
+\(4n\)-dimensional right Yetter--Drinfeld module, whereas the colored
+Links--Gould invariants are defined from typical
+\(U_q(\mathfrak{sl}(2|1))\)-modules.  We prove that these two constructions
+agree, up to the mirror and parameter inversion forced by the right-module
+convention.  The proof is structural.  We first realize the braid operator
+\(T_n\) as a gauge transform of a canonical super
+Yetter--Drinfeld braiding.  We then construct the relevant right--right
+paired double, prove that its Hopf pairing is perfect in every root degree,
+and obtain its completed universal \(R\)-matrix.  An explicit Abelian
+Drinfeld twist separates this double into an all-odd
+\(U_\hbar(\mathfrak{sl}(2|1))\) root factor and a commutative central
+factor.  Under this factorization, the Nichols module becomes a typical
+all-odd highest-weight module tensored with a one-dimensional central
+module.  Finally, we transport duality, all four oriented crossings,
+partial transposes, and writhe normalization.  For every oriented knot
+\(\mathcal K\), every \(n\geq 1\), and every
+\(\beta\neq 0,-1\), the result is
+\[
+ V_{n,\mathcal K}\!\left(Q^{2n\beta+n},Q^2\right)
+ =
+ LG_{\mathcal K}^{(n)}\!\left(Q^{-n\beta},Q^{-1}\right)
+ =
+ LG_{\overline{\mathcal K}}^{(n)}\!\left(Q^{n\beta},Q\right).
+\]
+In particular, the scalar-identity property conjectured for the
+endomorphism-valued \(V_n\) construction follows from the simplicity of
+the corresponding typical module.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+
+The invariants \(V_n\) of Garoufalidis and Kashaev are extracted from a
+family of braid-form Yang--Baxter operators \(T_n\) acting on
+\(4n\)-dimensional spaces \(Y_n\).  The construction is rooted in a
+rank-two Nichols algebra and is strikingly explicit.  The colored
+Links--Gould invariant, by contrast, is built from typical modules over a
+quantum deformation of \(\mathfrak{sl}(2|1)\).  The two theories therefore
+begin with rather different algebraic input.  The purpose of this paper is
+to explain why they nevertheless produce the same knot invariant.
+
+The connection is not obtained by a direct comparison of two large
+matrices.  Instead, we expose a sequence of structural identifications:
+\[
+\begin{gathered}
+\text{Nichols braid operator }T_n
+\longleftrightarrow
+\text{super Yetter--Drinfeld braiding}\\
+\longleftrightarrow
+\text{braiding of a completed paired double}\\
+\xrightarrow{\ \text{root--center twist}\ }
+U_\hbar^{\Pi_{\ao}}(\mathfrak{sl}(2|1))
+\hot \mathcal Z_{\cen}.
+\end{gathered}
+\]
+The \(4n\)-dimensional object splits at the last stage as
+\[
+ \mathcal Y_n\cong W_{n,\beta}^{\ao}\boxtimes L_{n,\beta},
+\]
+where \(W_{n,\beta}^{\ao}\) is a simple all-odd highest-weight module and
+\(L_{n,\beta}\) is one-dimensional and central.  The central line
+contributes a computable crossing scalar.  It disappears on balanced
+normal long-knot diagrams and, more generally, under the standard writhe
+normalization.
+
+There are two points at which a braid-level comparison could fail to
+produce a knot invariant.  First, the Hopf pairing used to form the double
+must be well defined, nondegenerate in the relevant completion, and strong
+enough to produce a genuine universal \(R\)-matrix.  We prove this using
+explicit alternating-word bases and root-degree pairing matrices.  Second, a
+conjugacy on \(Y_n\otimes Y_n\) does not by itself control cups, caps,
+mixed orientations, partial transposes, or curls.  We therefore transport
+the entire rigid tangle calculus and compare the transported duality maps
+with the ordinary finite-dimensional ones.
+
+\subsection{Related work and scope}
+
+The original Links--Gould invariant was constructed from the
+four-dimensional family of typical modules over
+\(U_q(\mathfrak{gl}(2|1))\), using a tensor-state model for
+\((1,1)\)-tangles \cite{DeWitKauffmanLinks}.  This is an instance of the
+Reshetikhin--Turaev construction from a ribbon category
+\cite{ReshetikhinTuraev}.  Because typical modules for Lie superalgebras
+have vanishing ordinary quantum dimension, the natural closed-link theory
+is more conveniently expressed using a renormalized invariant or modified
+trace.  For \(\mathfrak{sl}(2|1)\), this point of view was developed by
+Geer and Patureau--Mirand \cite{GeerPatureau}, and it underlies the modern
+colored Links--Gould family.
+
+The relevant algebraic background has several distinct layers.  The
+classification and root theory of basic classical Lie superalgebras go
+back to Kac \cite{Kac}, while changes of Borel through isotropic odd roots
+belong to the generalized-root-system framework of Serganova
+\cite{Serganova}.  Quantized enveloping superalgebras and their universal
+\(R\)-matrices were constructed explicitly by Yamane \cite{Yamane}.
+Etingof--Kazhdan quantization in the super setting and its relation to
+Drinfeld--Jimbo presentations, including arbitrary Cartan matrices, were
+studied by Geer \cite{GeerEK,GeerCartan}.  Geer's comparison with the
+Kontsevich integral identifies the corresponding quantum-group and
+weight-system invariants for Lie superalgebras of type A--G
+\cite{GeerKontsevich}.  These general results supply essential structural
+background, but they do not by themselves identify the particular
+right--right completed double, module gauges, duality conventions, and
+writhe normalization used below; those interfaces are treated explicitly
+in this paper.
+
+On the Nichols-algebra side, the spaces \(Y_n\) and their braid operators
+were introduced by Garoufalidis and Kashaev in their construction of
+multivariable knot polynomials from braided Hopf algebras with
+automorphisms \cite{GK}.  Garoufalidis, Harper, Kashaev, Kohli, and Wagner
+subsequently defined the colored Links--Gould sequence from
+\(4n\)-dimensional typical modules, established its cabling and modified
+trace framework, and formulated the equality with the \(V_n\)-sequence as
+a conjecture; in that work the comparison was proved for \(n=2\)
+\cite[Conjecture~1.4 and Theorem~1.5]{ColoredLG}.  Thus the contribution
+claimed here is not the definition of either family.  It is the proposed
+all-\(n\) structural bridge: the realization of the Nichols operator in a
+completed paired double, its root--center separation, the identification
+of the coloring object, and the transport of the full oriented rigid
+tangle data needed to compare the normalized knot scalars.
+
+We work with a formal quantum parameter, away from the atypical values
+\(\beta=0,-1\).  The comparison concerns normalized oriented-knot
+invariants, computed from normal \((1,1)\)-tangles; it does not assert an
+equivalence of the entire module categories.  The completion conventions
+are specified in \cref{sec:conventions,sec:completion}.
+
+\subsection{Main results}
+
+Let \(\kk\) be a field of characteristic zero,
+\[
+ R=\kk[[\hbar]],\qquad \hK=\kk((\hbar)),\qquad Q=e^\hbar.
+\]
+The invariant \(LG_{\mathcal K}^{(n)}(q^\alpha,q)\) is normalized using the
+\(4n\)-dimensional typical distinguished-Borel module
+\(V_0(n-1,\alpha)\), with value \(1\) on the unknot.
+
+\begin{theorem}[Main theorem]\label{thm:main}
+For every \(n\geq 1\), every \(\beta\in\kk\setminus\{0,-1\}\), and every
+oriented knot \(\mathcal K\),
+\begin{equation}\label{eq:main}
+ V_{n,\mathcal K}\!\left(Q^{2n\beta+n},Q^2\right)
+ =
+ LG_{\mathcal K}^{(n)}\!\left(Q^{-n\beta},Q^{-1}\right)
+ =
+ LG_{\overline{\mathcal K}}^{(n)}\!\left(Q^{n\beta},Q\right).
+\end{equation}
+Moreover, the endomorphism-valued long-knot invariant defining \(V_n\)
+is a scalar multiple of the identity on \(\mathcal Y_n\).
+\end{theorem}
+
+The algebraic mechanism behind \cref{thm:main} is summarized by the next
+two statements.
+
+The proof has two algebraic ingredients.  The completed paired double
+has a root-degree perfect Hopf pairing and a universal \(R\)-matrix
+(\cref{thm:universal-R}); an Abelian twist separates its root and central
+Hopf factors (\cref{thm:root-center,prop:R-factor}).  Under this
+separation, the coloring object has the module decomposition above
+(\cref{thm:object}).  The braid comparison extends to oriented crossings
+and duality, yielding the long-knot transport formula of \cref{thm:rigid}.
+
+\subsection{Outline of the proof}
+
+Section~2 constructs the positive Hopf superalgebra and its finite-dimensional
+super Yetter--Drinfeld module.  Section~3 constructs the completed paired
+double and its universal \(R\)-matrix.  Section~4 separates the root and
+central factors, and Section~5 identifies the coloring module, including
+its distinguished-Borel highest weight.  Section~6 compares all oriented
+crossings and duality maps.  Section~7 assembles these local identities
+into long-knot transport and proves the comparison with the standard
+colored Links--Gould invariant.  Appendix~A checks the original
+Garoufalidis--Kashaev conventions and records the parameter dictionary;
+Appendix~B gives the first root-degree terms of the canonical tensor.
+
+\section{The Nichols module and its braiding}
+\subsection{Conventions}\label{sec:conventions}
+
+Unless otherwise stated, algebras, modules, pairings, and linear maps
+are over \(\hK\).  Formal quantum groups and exponentials are first
+defined over \(R\), with tensor products of their \(R\)-forms
+\(\hbar\)-adically completed, and are then extended to \(\hK\).
+In particular, \(\hK\hot_R U_\hbar\) means
+\(\hK\ot_R U_\hbar\) with the \(R\)-form \(U_\hbar\) already
+complete; no further ideal-adic completion after inverting \(\hbar\)
+is intended.  Completed tensor products of the resulting
+\(\hK\)-algebras are likewise formed from the indicated completed
+\(R\)-forms before extension of scalars.  The field \(\hK\) carries
+its Laurent series valuation topology, not the ideal-adic topology
+of \((\hbar)\subset\hK\), since \(\hbar\) is invertible.
+Infinite root-degree products use the additional directed completion
+specified in \cref{sec:completion}.  For an even element \(H\),
+\[
+ Q^H=e^{\hbar H}.
+\]
+If \(a,b,c,d\) are homogeneous elements of super vector spaces, then
+\begin{equation}\label{eq:koszul}
+ (a\ot b)(c\ot d)=(-1)^{|b||c|}ac\ot bd.
+\end{equation}
+
+Every module in this paper is a right module.  Thus, if
+\(\rho(X)(v)=v\tri X\), then
+\begin{equation}\label{eq:right-antihom}
+ \rho(XY)=\rho(Y)\rho(X).
+\end{equation}
+Our universal \(R\)-matrix convention is
+\begin{equation}\label{eq:R-convention}
+ \mathcal R\Delta(a)=\Delta^{\mathrm{op}}(a)\mathcal R.
+\end{equation}
+It follows from \eqref{eq:right-antihom} that the canonical braiding on
+right modules is
+\begin{equation}\label{eq:right-braiding}
+ c^{\mathcal R}_{V,W}
+ =\tau^{\mathrm s}\rho_{V\ot W}(\mathcal R^{-1}),
+\end{equation}
+where \(\tau^{\mathrm s}\) is the super flip.  This inverse is responsible
+for the mirror in \cref{eq:main}.
+
+\subsection{The reduced positive half}
+\label{sec:reduced}
+
+Let \(\mathcal H^+\) be the topological Hopf superalgebra over
+\(\hK\) obtained by extending scalars from the \(\hbar\)-adic
+completion of the \(R\)-superalgebra generated by even elements
+\(H_1,H_2\) and odd elements \(x_1,x_2\), subject to
+\begin{equation}\label{eq:positive-relations}
+ [H_1,H_2]=0,\qquad
+ [H_i,x_j]=a_{ij}x_j,\qquad x_1^2=x_2^2=0,
+ \qquad
+ A=(a_{ij})=\begin{pmatrix}0&1\\1&0\end{pmatrix}.
+\end{equation}
+No additional quadratic relation is imposed between \(x_1x_2\) and
+\(x_2x_1\).  The Hopf structure is
+\begin{equation}\label{eq:positive-Hopf}
+\begin{aligned}
+ \Delta(H_i)&=H_i\ot1+1\ot H_i,
+ &\varepsilon(H_i)&=0,
+ &S(H_i)&=-H_i,\\
+ \Delta(x_i)&=x_i\ot1+Q^{H_i}\ot x_i,
+ &\varepsilon(x_i)&=0,
+ &S(x_i)&=-Q^{-H_i}x_i.
+\end{aligned}
+\end{equation}
+\subsection[The space Yn]{The space \(\mathcal Y_n\)}
+
+Let \(B_{\hK}\) be the superalgebra generated by \(x_1,x_2\) with only
+\(x_1^2=x_2^2=0\).  A bihomogeneous element of bidegree \((a,b)\) has parity
+\(\overline{a+b}\).  For nonzero bihomogeneous elements
+\(x,y\in B_{\hK}\) with \(\deg x=(a,b)\) and \(\deg y=(c,d)\), define
+\begin{equation}\label{eq:chi}
+ \chi(x,y)=(-1)^{(a+b)(c+d)}Q^{ad+bc}.
+\end{equation}
+The full diagonal braiding is the linear map determined by
+\[
+ \tau_\chi(x\ot y)=\chi(x,y)y\ot x.
+\]
+In particular,
+\[
+ \chi(x,x_1)=(-1)^{a+b}Q^b,\qquad
+ \chi(x,x_2)=(-1)^{a+b}Q^a.
+\]
+We use the same notation on the bihomogeneous elements of
+\(\mathcal Y_n\subset B_{\hK}\) defined below.  All subsequent uses of
+\(\chi\) and all Sweedler formulas are understood on bihomogeneous
+components.
+Fix \(n\geq1\) and set
+\begin{equation}\label{eq:parameters}
+ t=Q^{2n\beta+n}.
+\end{equation}
+Define
+\[
+ v_n=(x_1x_2)^n+t(x_2x_1)^n.
+\]
+For \(\beta\neq0,-1\), let \(\mathcal Y_n\) be the span of
+\begin{equation}\label{eq:Yn-basis}
+\begin{split}
+ \{1,v_n\}
+ &\cup\{(x_1x_2)^k,(x_2x_1)^k:1\leq k<n\}\\
+ &\cup\{(x_1x_2)^kx_1,(x_2x_1)^kx_2:0\leq k<n\}.
+\end{split}
+\end{equation}
+This displayed set is a basis, so \(\dim_{\hK}\mathcal Y_n=4n\).
+
+The parameter and convention dictionary identifying \(\mathcal Y_n\) with
+the right Yetter--Drinfeld module \(Y_n\) of
+\cite[Proposition~7.4]{GK} is given in
+\cref{app:GK-conventions}.  Under this identification, \(T_n\) denotes
+precisely the braid-form \(R\)-matrix defined by
+\cite[Theorem~3.6 and Definition~7.5]{GK}, after extension of scalars to
+\(\hK\).
+
+\subsection{The super Yetter--Drinfeld structure}
+\label{sec:yd}
+
+Introduce the group-like element
+\begin{equation}\label{eq:Un}
+ U_n=Q^{-2n\beta H_1+2n(\beta+1)H_2}.
+\end{equation}
+For homogeneous \(y\in\mathcal Y_n\) of bidegree \((a,b)\), define
+\begin{equation}\label{eq:Yn-action}
+\begin{aligned}
+ y\tri H_1&=-by,& y\tri H_2&=-ay,\\
+ y\tri x_1&=yx_1-Q^{-2n(\beta+1)}\chi(y,x_1)x_1y,\\
+ y\tri x_2&=yx_2-Q^{2n\beta}\chi(y,x_2)x_2y.
+\end{aligned}
+\end{equation}
+The boundary identities
+\[
+ v_n\tri x_1=v_n\tri x_2=0,\qquad
+ ((x_1x_2)^{n-1}x_1)\tri x_2=v_n,\qquad
+ ((x_2x_1)^{n-1}x_2)\tri x_1=t^{-1}v_n
+\]
+show directly that the action preserves \(\mathcal Y_n\).
+
+For \(y\) of bidegree \((a,b)\), write the braided coproduct in
+\(B_{\hK}\) as
+\[
+ \Delta_B(y)=\sum y^{(1)}\ot y^{(2)},\qquad
+ \text{with bihomogeneous summands}.
+\]
+Then
+\begin{equation}\label{eq:Yn-coaction}
+ \delta_n^{\mathrm s}(y)
+ =
+ \sum (-1)^{|y^{(1)}||y^{(2)}|}
+ \chi(y^{(2)},y^{(1)})^{-1}y^{(1)}\ot
+ U_nQ^{-aH_1-bH_2}y^{(2)}.
+\end{equation}
+The explicit parity sign in \eqref{eq:Yn-coaction} cancels the Koszul
+sign in \(\chi(y^{(2)},y^{(1)})^{-1}\); the super tensor category
+already supplies the Koszul interchange.
+
+\begin{proposition}\label{prop:YD}
+Equations \eqref{eq:Yn-action} and \eqref{eq:Yn-coaction} make
+\(\mathcal Y_n\) a right--right super Yetter--Drinfeld module over
+\(\mathcal H^+\).
+\end{proposition}
+
+\begin{proof}
+For \(y\) of bidegree \((a,b)\), set
+\[
+ \iota_n(y)=U_nQ^{-aH_1-bH_2}y\in\mathcal H^+.
+\]
+The action \eqref{eq:Yn-action} is the pullback along \(\iota_n\) of the
+right super-adjoint action
+\[
+ A\tri_{\mathrm{ad}}h
+ =\sum(-1)^{|A||h_{(1)}|}S(h_{(1)})Ah_{(2)}.
+\]
+Moreover,
+\[
+ \Delta(\iota_n(y))=(\iota_n\ot\id)\delta_n^{\mathrm s}(y).
+\]
+Thus \(\iota_n(\mathcal Y_n)\) is stable under the right adjoint action
+and is a right coideal.  The standard adjoint/coideal calculation, with
+the Koszul rule \eqref{eq:koszul}, gives the right--right super
+Yetter--Drinfeld identity.  Counitality and coassociativity follow by
+restricting those of \(\Delta\).
+\end{proof}
+
+The identification of the original operator \(T_n\) with the braiding
+transported from this module is established in \cref{sec:rigid}; the
+parameter and action conventions are checked in \cref{app:GK-conventions}.
+
+\section{The completed paired double}\label{sec:double}
+
+\subsection{The negative half and the Hopf pairing}
+
+Define
+\(\mathcal H^-\) using even generators \(\widehat H_1,\widehat H_2\),
+and odd generators \(F_1,F_2\), with
+\[
+ [\widehat H_1,\widehat H_2]=0,\qquad
+ [\widehat H_i,F_j]=a_{ji}F_j,\qquad F_i^2=0,
+\]
+and
+\begin{equation}\label{eq:negative-Hopf}
+\begin{aligned}
+ \Delta(\widehat H_i)&=\widehat H_i\ot1+1\ot\widehat H_i,&
+ S(\widehat H_i)&=-\widehat H_i,\\
+ \Delta(F_i)&=F_i\ot Q^{\widehat H_i}+1\ot F_i,&
+ S(F_i)&=-F_iQ^{-\widehat H_i}.
+\end{aligned}
+\end{equation}
+The even Hopf pairing
+\(\eta:\mathcal H^-\hot\mathcal H^+\to\hK\) is determined by
+\begin{equation}\label{eq:eta-generators}
+ \eta(\widehat H_i,H_j)=-\frac{a_{ji}}{\hbar},
+ \qquad
+ \eta(F_i,x_j)=\delta_{ij},
+\end{equation}
+all mixed Cartan--root pairings being zero, and by the right-dual order
+\begin{equation}\label{eq:eta-extension}
+\eta(fg,h)=\sum\eta(g,h_{(1)})\eta(f,h_{(2)}),\qquad
+\eta(f,hk)=\sum\eta(f_{(1)},h)\eta(f_{(2)},k),
+\end{equation}
+with the Koszul sign understood in the second formula.
+
+\subsection{Alternating-word bases, the Hopf pairing, and completion}\label{sec:completion}
+
+For \(m\geq1\), let \(X_{i,m}\) be the alternating word of length \(m\)
+in \(x_1,x_2\) beginning with \(x_i\), and let \(F_{i,m}\) be its
+negative analogue.  The adjacent-square relations generate monomial
+ideals, so the words that avoid adjacent squares form bases of the root
+algebras.  These are exactly the alternating words.  Their degree pieces
+are
+\[
+ B_m^+=\hK X_{1,m}\oplus\hK X_{2,m},\qquad
+ B_m^-=\hK F_{1,m}\oplus\hK F_{2,m}.
+\]
+Set \(B_0^+=B_0^-=\hK1\), and let \(\mathcal C^+\) and
+\(\mathcal C^-\) be the Cartan subalgebras generated by
+\(H_1,H_2\) and \(\widehat H_1,\widehat H_2\), respectively:
+their polynomial \(R\)-forms are \(\hbar\)-adically completed before
+extension to \(\hK\), as specified in \cref{sec:conventions}.
+The commuting Cartan generators act diagonally on the alternating
+words.  The corresponding commuting weight derivations preserve the
+adjacent-square ideals, so each half is the semidirect product of its
+root algebra with its Cartan algebra.  Thus placing the Cartan
+coefficients on the left gives unique normal forms and topological
+vector-space decompositions
+\[
+ \mathcal H^\pm
+ \cong\widehat{\bigoplus}_{m\geq0}\mathcal C^\pm B_m^\pm.
+\]
+
+\begin{lemma}\label{lem:pairing-descends}
+The formulas \eqref{eq:eta-generators}--\eqref{eq:eta-extension} descend
+uniquely to a continuous even Hopf pairing on
+\(\mathcal H^-\hot\mathcal H^+\), and
+\(\eta(B_m^-,B_l^+)=0\) for \(m\neq l\).
+\end{lemma}
+
+\begin{proof}
+In the free Hopf superalgebras, the odd--odd terms in the coproduct cancel
+by the Koszul rule, so the square relations on either side annihilate the
+relation ideal on the other.  Primitive Cartan elements preserve Cartan
+commutativity, while
+\(\eta(Q^{\widehat H_i},Q^{H_j})=Q^{-a_{ji}}\) preserves the fixed-weight
+Cartan--root relations.  Hence both relation ideals lie in the radicals
+of the free pairing, and the pairing descends.  Root-degree orthogonality
+follows from the skew-primitive coproducts.
+\end{proof}
+
+The Hopf pairing defines the right--right paired double
+\[
+ \mathfrak D_{\mathrm{rr},\eta}=\mathcal H^-\bowtie_\eta\mathcal H^+.
+\]
+The cross relations in the double are
+\begin{equation}\label{eq:double-cross}
+\begin{aligned}
+ [H_i,\widehat H_j]&=0,&
+ [H_i,F_j]&=-a_{ij}F_j,\\
+ [\widehat H_i,x_j]&=-a_{ji}x_j,&
+ x_iF_j+F_jx_i&=\delta_{ij}(Q^{H_i}-Q^{\widehat H_i}).
+\end{aligned}
+\end{equation}
+Put \(P_r(Q)=\prod_{s=1}^r(1-Q^{-2s})\), with \(P_0(Q)=1\), and let
+\[
+ M_m(i,j)=\eta(F_{i,m},X_{j,m}).
+\]
+
+\begin{proposition}[Root-degree perfectness]\label{prop:perfect-pairing}
+For \(r\geq0\) and \(r\geq1\), respectively,
+\begin{equation}\label{eq:pairing-matrices}
+\begin{aligned}
+ M_{2r+1}&=(-1)^rP_r(Q)I_2,\\
+ M_{2r}&=(-1)^rP_{r-1}(Q)
+ \begin{pmatrix}1&-Q^{-r}\\-Q^{-r}&1\end{pmatrix}.
+\end{aligned}
+\end{equation}
+Consequently,
+\[
+ \det M_{2r+1}=P_r(Q)^2,\qquad
+ \det M_{2r}=P_{r-1}(Q)P_r(Q),
+\]
+and \(\eta|_{B_m^-\ot B_m^+}\) is perfect for every \(m\).
+\end{proposition}
+
+\begin{proof}
+Apply \eqref{eq:eta-extension} recursively to the last letter of each
+alternating word.  The two possible starting letters give a two-state
+recurrence.  At odd length its off-diagonal entries cancel, while at even
+length the two possible terminal pairings differ by \(Q^{-r}\).  Starting
+from \(M_1=I_2\) and
+\[
+ M_2=\begin{pmatrix}-1&Q^{-1}\\Q^{-1}&-1\end{pmatrix}
+\]
+gives \eqref{eq:pairing-matrices} by induction.  Taking determinants and
+using \(P_r=P_{r-1}(1-Q^{-2r})\) proves the claim.  Every \(P_r(Q)\) is
+nonzero in \(\hK=\kk((\hbar))\).
+\end{proof}
+
+We use the directed root-degree completion
+\begin{equation}\label{eq:directed-completion}
+ \widehat{\mathcal T}_{+,-}
+ =
+ \prod_{m\geq0}
+ (\mathcal C^+B_m^+)\hot_{\hK}(\mathcal C^-B_m^-).
+\end{equation}
+The product completes only the common root degree; in each factor,
+the Cartan tensor product is formed from the completed \(R\)-forms
+before extension to \(\hK\).  Root degrees add under multiplication, so
+every fixed degree of a product contains only finitely many summands.
+
+\begin{theorem}[Completed universal \(R\)-matrix]\label{thm:universal-R}
+The signed right-dual coevaluation series of the paired double
+\(\mathfrak D_{\mathrm{rr},\eta}\) belongs to
+\eqref{eq:directed-completion} and is invertible there.  Define
+\(\mathcal R_{\mathrm{rr}}\) to be its inverse.  Then
+\begin{align}
+ \mathcal R_{\mathrm{rr}}\Delta(d)
+ &=\Delta^{\mathrm{op}}(d)\mathcal R_{\mathrm{rr}},
+ \label{eq:R-intertwines}\\
+ (\Delta\ot\id)(\mathcal R_{\mathrm{rr}})
+ &=\mathcal R_{13}\mathcal R_{23},&
+ (\id\ot\Delta)(\mathcal R_{\mathrm{rr}})
+ &=\mathcal R_{13}\mathcal R_{12}.
+\label{eq:R-hexagons}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+\Cref{prop:perfect-pairing} supplies a dual basis in each root degree.
+The super right-dual coevaluation contributes the additional sign
+\((-1)^m\) in degree \(m\).  The resulting series belongs to
+\eqref{eq:directed-completion}, and its inverse is defined recursively
+degree by degree.  Dualizing multiplication and coproduct through
+\eqref{eq:eta-extension} gives
+\[
+\begin{aligned}
+ \Delta(d)\mathcal R_{\mathrm{rr}}^{-1}
+ &=\mathcal R_{\mathrm{rr}}^{-1}\Delta^{\mathrm{op}}(d),\\
+ (\Delta\ot\id)(\mathcal R_{\mathrm{rr}}^{-1})
+ &=\mathcal R_{23}^{-1}\mathcal R_{13}^{-1},\\
+ (\id\ot\Delta)(\mathcal R_{\mathrm{rr}}^{-1})
+ &=\mathcal R_{12}^{-1}\mathcal R_{13}^{-1}.
+\end{aligned}
+\]
+Inverting these identities proves \eqref{eq:R-intertwines} and
+\eqref{eq:R-hexagons}.  No identification of either half with the full
+continuous dual of the other is required.
+\end{proof}
+
+The double action induced from the Yetter--Drinfeld structure agrees,
+through \eqref{eq:right-braiding}, with the canonical braiding
+\(c_n^{\mathrm s}\).
+
+\section{Root--center factorization}\label{sec:root-center}
+
+\subsection{Root and central variables}
+
+Define
+\begin{equation}\label{eq:root-center-Cartan}
+ \mathsf h_i=\frac{H_i-\widehat H_i}{2},\qquad
+ \mathsf c_i=H_i+\widehat H_i.
+\end{equation}
+The \(\mathsf c_i\) are central.  Normalize the odd root vectors by
+\begin{equation}\label{eq:root-generators}
+ E_i=Q^{-\mathsf c_i/4}x_i,\qquad
+ G_i=Q^{-\mathsf c_i/4}F_i.
+\end{equation}
+This separates the multiplication but not yet the coproduct.
+
+\subsection{The Abelian twist}
+
+Because \(A^{-1}=A\), define
+\begin{equation}\label{eq:Frc}
+\mathcal F_{\rc}
+=
+\exp\!\left[
+\frac{\hbar}{4}
+\sum_{i,j=1}^2(A^{-1})_{ji}
+\bigl(\mathsf h_i\ot\mathsf c_j-\mathsf c_j\ot\mathsf h_i\bigr)
+\right].
+\end{equation}
+All entries in the exponent are commuting even primitive elements.
+Therefore \(\mathcal F_{\rc}\) is a normalized Drinfeld twist.
+The twisted paired double has coproduct
+\[
+ \Delta_{\rc}(a)=\mathcal F_{\rc}\Delta(a)\mathcal F_{\rc}^{-1}.
+\]
+Its universal \(R\)-matrix is obtained by twisting the universal
+\(R\)-matrix \(\mathcal R_{\mathrm{rr}}\) of \cref{thm:universal-R}:
+\begin{equation}\label{eq:twisted-universal-R}
+ \mathcal R_{\rc}
+ =\mathcal F_{\rc,21}\mathcal R_{\mathrm{rr}}
+  \mathcal F_{\rc}^{-1}.
+\end{equation}
+Thus \(\mathcal R_{\rc}\) is the universal \(R\)-matrix associated
+with \(\Delta_{\rc}\), on the same underlying algebra.
+
+For the convention \(\Delta_F=F\Delta F^{-1}\), the twisted antipode
+is \(S_F=u_FS u_F^{-1}\), where
+\(u_F=m(\id\ot S)(F)\).  In the present case the Cartan elements in
+\eqref{eq:Frc} are commuting, even, and primitive, so
+\[
+ m(\id\ot S)(\mathcal F_{\rc})
+ =\exp\!\left[
+ \frac{\hbar}{4}\sum_{i,j=1}^2(A^{-1})_{ji}
+ (-\mathsf h_i\mathsf c_j+\mathsf c_j\mathsf h_i)
+ \right]=1.
+\]
+Consequently,
+\begin{equation}\label{eq:twist-antipode-unchanged}
+ S_{\rc}=S.
+\end{equation}
+Thus the twist leaves the dual-module actions unchanged, and the
+canonical duality comparison for the twist equivalence is the identity.
+The tensorator itself is generally nontrivial, but its contribution
+contracts to the identity in evaluation and coevaluation.  This twist
+therefore introduces no additional duality gauge.
+
+\begin{theorem}[Root--center separation]\label{thm:root-center}
+After twisting, the root and central Hopf structures separate:
+\begin{equation}\label{eq:Hopf-factor}
+ \mathfrak D_{\mathrm{rr},\eta}^{\mathcal F_{\rc}}
+ \cong\mathcal D_{\rootpart}\hot\mathcal Z_{\cen}.
+\end{equation}
+Moreover,
+\[
+ \mathcal D_{\rootpart}
+ \cong
+ \hK\hot_R U_\hbar^{\Pi_{\ao}}(\mathfrak{sl}(2|1)).
+\]
+Here the standard positive and negative Chevalley generators correspond
+to \(E_i\) and \((Q-Q^{-1})^{-1}G_i\), respectively, and the Cartan
+generators correspond to \(\mathsf h_i\).
+\end{theorem}
+
+For clarity, the complete root presentation used in this theorem is
+\begin{equation}\label{eq:all-odd-root-presentation}
+\begin{gathered}
+ [\mathsf h_i,\mathsf h_j]=0,
+ \qquad [\mathsf h_i,E_j]=a_{ij}E_j,
+ \qquad [\mathsf h_i,G_j]=-a_{ij}G_j,\\
+ E_1^2=E_2^2=G_1^2=G_2^2=0,
+ \qquad
+ E_iG_j+G_jE_i
+ =\delta_{ij}(Q^{\mathsf h_i}-Q^{-\mathsf h_i}).
+\end{gathered}
+\end{equation}
+No additional quadratic relation is imposed between \(E_1E_2\) and
+\(E_2E_1\), or between \(G_1G_2\) and \(G_2G_1\).  Every central
+generator commutes with every generator in
+\eqref{eq:all-odd-root-presentation}.
+
+\begin{proof}
+Conjugating the four skew-primitive terms by
+\(\mathcal F_{\rc}\) gives
+\[
+\begin{aligned}
+ \Delta_{\rc}(E_i)&=E_i\ot1+Q^{\mathsf h_i}\ot E_i,\\
+ \Delta_{\rc}(G_i)&=G_i\ot Q^{-\mathsf h_i}+1\ot G_i.
+\end{aligned}
+\]
+The \(\mathsf h_i,\mathsf c_i\) remain primitive, so their
+exponentials remain group-like.  Thus no central generator occurs in the coproduct of
+a root generator.  Conversely, the \(\mathsf c_i\) and their exponentials
+generate a central commutative Hopf algebra.  The multiplication relations
+from \eqref{eq:double-cross} become the all-odd
+\(\mathfrak{sl}(2|1)\) relations, with both simple roots isotropic and
+Cartan matrix \(A\).  To check that the algebra map is an
+isomorphism, use the inverse substitutions
+\[
+ H_i=\mathsf h_i+\tfrac12\mathsf c_i,\qquad
+ \widehat H_i=-\mathsf h_i+\tfrac12\mathsf c_i,\qquad
+ x_i=Q^{\mathsf c_i/4}E_i,\qquad
+ F_i=Q^{\mathsf c_i/4}G_i.
+\]
+Centrality of the \(\mathsf c_i\) and
+\eqref{eq:all-odd-root-presentation} recover all Cartan--root
+commutators and square relations.  They also give
+\[
+ x_iF_j+F_jx_i
+ =\delta_{ij}Q^{\mathsf c_i/2}
+ (Q^{\mathsf h_i}-Q^{-\mathsf h_i})
+ =\delta_{ij}(Q^{H_i}-Q^{\widehat H_i}),
+\]
+recovering \eqref{eq:double-cross}.  Hence the inverse substitutions
+define an algebra map inverse to the generator change
+\eqref{eq:root-center-Cartan}--\eqref{eq:root-generators}.
+The coproduct formulas above make this a Hopf isomorphism, proving
+\eqref{eq:Hopf-factor}.
+\end{proof}
+
+\subsection[Factorization of the universal R-matrix]
+{Factorization of the universal \(R\)-matrix}
+
+We now describe how \(\mathcal R_{\rc}\) separates under the Hopf
+isomorphism \eqref{eq:Hopf-factor}.
+Let \(\mathcal R_{\rootpart}^{\rc}\) denote the inverse of the signed
+canonical root tensor after replacing alternating \(x\)- and \(F\)-words
+by the corresponding \(E\)- and \(G\)-words.  This is the root-vector
+factor; the complete universal \(R\)-matrix of
+\(\mathcal D_{\rootpart}\) also includes its Cartan factor.
+Define the root and central Cartan factors by
+\[
+\begin{aligned}
+ \mathcal R_{\mathrm{Cart}}^{\rootpart}
+ &=
+ \exp\!\left[-\hbar(
+ \mathsf h_1\ot\mathsf h_2+\mathsf h_2\ot\mathsf h_1)\right],\\
+ \mathcal R_{\mathrm{Cart}}^{\cen}
+ &=
+ \exp\!\left[\frac{\hbar}{4}(
+ \mathsf c_1\ot\mathsf c_2+\mathsf c_2\ot\mathsf c_1)\right].
+\end{aligned}
+\]
+
+\begin{proposition}\label{prop:R-factor}
+In the directed completion,
+\begin{equation}\label{eq:R-factor}
+ \mathcal R_{\rc}
+ =
+ \mathcal R_{\rootpart}^{\rc}
+ \mathcal R_{\mathrm{Cart}}^{\rootpart}
+ \mathcal R_{\mathrm{Cart}}^{\cen}.
+\end{equation}
+Under \eqref{eq:Hopf-factor}, the product
+\(\mathcal R_{\rootpart}^{\rc}\mathcal R_{\mathrm{Cart}}^{\rootpart}\)
+belongs to the completed tensor square of \(\mathcal D_{\rootpart}\)
+and is its universal \(R\)-matrix, while
+\(\mathcal R_{\mathrm{Cart}}^{\cen}\) belongs to the completed tensor
+square of \(\mathcal Z_{\cen}\) and is its universal \(R\)-matrix.
+Their embeddings into the completed tensor square of the twisted double
+commute, and their product is \(\mathcal R_{\rc}\).
+Thus \eqref{eq:Hopf-factor} separates the quasitriangular structures as
+well as the Hopf algebra structures.
+\end{proposition}
+
+\begin{proof}
+Substitution of
+\(H_i=\mathsf h_i+\frac12\mathsf c_i\) and
+\(\widehat H_i=-\mathsf h_i+\frac12\mathsf c_i\) into the untwisted
+Cartan exponential yields pure-root, mixed, and pure-central terms.
+Since the exponent of \(\mathcal F_{\rc}\) is antisymmetric,
+\(\mathcal F_{\rc,21}=\mathcal F_{\rc}^{-1}\); the twist factors in
+\eqref{eq:twisted-universal-R} cancel the mixed terms exactly.
+They simultaneously turn every root tensor
+\(X_{i,m}\ot F_{j,m}\) into \(E_{i,m}\ot G_{j,m}\).
+This proves \eqref{eq:R-factor}.  The universal \(R\)-identities follow
+by twisting \cref{thm:universal-R}.
+Under \eqref{eq:Hopf-factor}, apply the Hopf projections
+\(\id\ot\varepsilon_{\cen}\) and
+\(\varepsilon_{\rootpart}\ot\id\) to both tensor legs of these
+identities.  The first projection removes the central Cartan factor,
+leaving \(\mathcal R_{\rootpart}^{\rc}
+\mathcal R_{\mathrm{Cart}}^{\rootpart}\); the second removes the root
+factors, leaving \(\mathcal R_{\mathrm{Cart}}^{\cen}\).
+Hence each is a universal \(R\)-matrix for the corresponding Hopf
+factor.  Centrality gives the asserted commutation.
+\end{proof}
+
+Consequently, on modules that split into root and central factors,
+the braiding splits into the corresponding two contributions.
+
+\section{Identification of the coloring module}\label{sec:module}
+
+\subsection{The root and central factors}
+
+On a homogeneous \(y\in\mathcal Y_n\) of degree \((a,b)\), the root and
+central Cartan elements act by
+\begin{equation}\label{eq:root-center-actions}
+\begin{aligned}
+ y\tri\mathsf h_1&=(n(\beta+1)-b)y,&
+ y\tri\mathsf h_2&=-(n\beta+a)y,\\
+ y\tri\mathsf c_1&=-2n(\beta+1)y,&
+ y\tri\mathsf c_2&=2n\beta y.
+\end{aligned}
+\end{equation}
+Let \(W_{n,\beta}^{\ao}\) be the simple all-odd right highest-weight module with
+even highest vector \(w_{n,\beta}\) satisfying
+\begin{equation}\label{eq:highest-weight}
+ w_{n,\beta}\tri E_1=w_{n,\beta}\tri E_2=0,\qquad
+ w_{n,\beta}\tri\mathsf h_1=n\beta w_{n,\beta},\qquad
+ w_{n,\beta}\tri\mathsf h_2=-n(\beta+1)w_{n,\beta}.
+\end{equation}
+Let \(L_{n,\beta}\) be the one-dimensional central module with characters
+\[
+ \mathsf c_1\mapsto-2n(\beta+1),\quad
+ \mathsf c_2\mapsto2n\beta.
+\]
+
+\subsection{Module identification and the braiding factors}
+
+\begin{theorem}[Module identification]\label{thm:object}
+For \(\beta\neq0,-1\),
+\begin{equation}\label{eq:object}
+ \mathcal Y_n
+ \cong W_{n,\beta}^{\ao}\boxtimes L_{n,\beta}
+\end{equation}
+as a right module over the twisted paired double.  The root factor
+\(W_{n,\beta}^{\ao}\) is simple and has dimension \(4n\).
+\end{theorem}
+
+\begin{proof}
+By \eqref{eq:Yn-action} and \eqref{eq:root-center-actions}, the nonzero
+even vector \(v_n\) is killed by \(E_1,E_2\) and has the highest weight
+\eqref{eq:highest-weight}.  Let
+\(M=v_n\tri\mathcal D_{\rootpart}\subseteq\mathcal Y_n\).
+As a cyclic highest-weight module, \(M\) has the simple highest-weight
+quotient \(W_{n,\beta}^{\ao}\).  The dimension formula
+\eqref{eq:typical-root-dimension}, established independently in
+\cref{sec:module-typicality} below, and the basis
+\eqref{eq:Yn-basis} give
+\[
+ 4n=\dim_{\hK}W_{n,\beta}^{\ao}
+ \leq\dim_{\hK}M
+ \leq\dim_{\hK}\mathcal Y_n=4n.
+\]
+Thus \(M=\mathcal Y_n\) and the quotient map is an isomorphism of
+root modules.  Finally, the central characters in
+\eqref{eq:root-center-actions}, together with
+\cref{thm:root-center}, supply the factor \(L_{n,\beta}\), proving
+\eqref{eq:object}.
+\end{proof}
+
+Fixing a nonzero vector in \(L_{n,\beta}\), the identification
+\eqref{eq:object} induces a root-module isomorphism
+\[
+ \Phi_n:\mathcal Y_n\xrightarrow{\sim}W_{n,\beta}^{\ao}.
+\]
+
+The factorization \eqref{eq:R-factor} now gives two contributions to
+the braiding.  Define the root braiding by
+\[
+ R'_{n,\beta}
+ =c^{\ao}_{W_{n,\beta}^{\ao},\,W_{n,\beta}^{\ao}}.
+\]
+By \eqref{eq:right-braiding}, it is obtained from the inverse of the
+root universal \(R\)-matrix.  The inverse of the central Cartan factor
+acts on \(L_{n,\beta}\ot L_{n,\beta}\), and hence on the central
+factors of \(\mathcal Y_n\ot\mathcal Y_n\), by the scalar
+\begin{equation}\label{eq:lambda}
+ \lambda_{n,\beta}^{\cen}=Q^{2n^2\beta(\beta+1)}.
+\end{equation}
+Indeed, substituting the characters
+\(\mathsf c_1=-2n(\beta+1)\) and \(\mathsf c_2=2n\beta\)
+into \((\mathcal R_{\mathrm{Cart}}^{\cen})^{-1}\) gives this value.
+
+\subsection{Odd reflection and typicality}
+\label{sec:module-typicality}
+
+We now determine the dimension of the abstract simple module
+\(W_{n,\beta}^{\ao}\), independently of \(\mathcal Y_n\).
+Set \(\alpha=n\beta\) and reflect the all-odd simple system at the
+first isotropic root.  The distinguished Cartan data are
+\[
+\gamma_1=\alpha_1+\alpha_2,\qquad
+\gamma_2=-\alpha_1,\qquad
+h_1^{\mathrm{dist}}=\mathsf h_1+\mathsf h_2,\qquad
+h_2^{\mathrm{dist}}=-\mathsf h_1.
+\]
+Write \(w=w_{n,\beta}\).  The relation
+\eqref{eq:all-odd-root-presentation} gives
+\[
+ (w\tri G_1)\tri E_1=(Q^{n\beta}-Q^{-n\beta})w.
+\]
+Thus \(w^{\mathrm{dist}}=w\tri G_1\neq0\) when \(\beta\neq0\).
+The odd-reflection calculation
+\cite{Serganova,Yamane} makes this an odd highest vector for the
+reflected Borel.  After the right-to-left conversion, its weights are
+\[
+ h_1^{\mathrm{dist}}\cdot w^{\mathrm{dist}}=(n-1)w^{\mathrm{dist}},
+ \qquad
+ h_2^{\mathrm{dist}}\cdot w^{\mathrm{dist}}=n\beta
+ w^{\mathrm{dist}}.
+\]
+Here the conversion is \(a\cdot u=(-1)^{|a||u|}u\tri S(a)\) for
+homogeneous \(a,u\); in particular it negates the Cartan weights.
+If \(V_0(m,\alpha)\) denotes the simple distinguished highest-weight
+module with an even highest vector, highest-weight classification gives
+\begin{equation}\label{eq:odd-reflection-object}
+ W_{n,\beta}^{\ao}\longleftrightarrow
+ \Pi V_0(n-1,n\beta).
+\end{equation}
+
+For \(m\in\mathbb Z_{\geq0}\), the distinguished module
+\(V_0(m,\alpha)\) is typical when
+\(\alpha(\alpha+m+1)\neq0\), and then has dimension \(4(m+1)\).
+These facts follow from the classical typicality criterion and character
+formula in \cite[\S1.1, equation~(2)]{GeerPatureau}, together with the
+character-preserving formal quantization recalled in
+\cite[\S1.2]{GeerPatureau}; see also
+\cite[\S3.3, equation~(39), and Lemma~3.4]{ColoredLG} for the
+quantum-module formulation.
+We use these formulas after extension to \(\hK\), with \(Q=e^\hbar\),
+so there is no root-of-unity specialization.
+For \(m=n-1\) and \(\alpha=n\beta\), the typicality condition is
+\[
+ \alpha(\alpha+m+1)=n^2\beta(\beta+1)\neq0.
+\]
+Consequently \(W_{n,\beta}^{\ao}\) is finite dimensional and
+\begin{equation}\label{eq:typical-root-dimension}
+ \dim_{\hK}W_{n,\beta}^{\ao}=4n
+ \qquad(\beta\neq0,-1).
+\end{equation}
+The parity shift in \eqref{eq:odd-reflection-object} records our even
+all-odd highest vector; the associated tangle conventions are compared
+in \cref{sec:LG}.
+
+\section{Oriented crossings and duality}\label{sec:rigid}
+
+\subsection{Integer-colored braid gauges and transported duality}
+\label{sec:oriented-fixed-color}
+
+We first identify the positive crossing \(T_n\) with a gauge transform
+of the canonical super Yetter--Drinfeld braiding.  The same gauge extends
+to dual strands and cups and caps; \cref{sec:standard-duality} compares
+the transported maps with standard partial transposes.
+
+Fix \(\beta\in\kk\setminus\{0,-1\}\).  We construct a single gauge
+for braid generators and oriented rigid transport with arbitrary integer
+colors.  Positive colors label the modules constructed above, negative
+colors label their left categorical duals, and zero labels the tensor unit.
+
+For \(n\geq1\), write
+\[
+ \mathcal Y_{-n}:=\mathcal Y_n^\vee
+ =\operatorname{Hom}_{\hK}(\mathcal Y_n,\hK).
+\]
+The negative index records categorical duality, rather than extending
+the preceding construction to negative \(n\).  Also set
+\(\mathcal Y_0:=\hK\), concentrated in even parity and bidegree
+\((0,0)\), with the counit action.  Thus \(\mathcal Y_a\) is defined
+for every \(a\in\mathbb Z\), with
+\(\dim_{\hK}\mathcal Y_a=4|a|\) for \(a\ne0\) and
+\(\dim_{\hK}\mathcal Y_0=1\).
+For homogeneous \(f\in\mathcal Y_{-n}\), \(h\) in the paired double,
+and \(y\in\mathcal Y_n\), its right action is
+\begin{equation}\label{eq:dual-right-action}
+ \langle f\tri h,y\rangle
+ =
+ (-1)^{|h|(|f|+1)}
+ \langle f,y\tri S^{-1}(h)\rangle.
+\end{equation}
+This is the unique action for which evaluation is a right-module
+morphism.  If \(\{e_a\}\) is a homogeneous basis and \(\{e^a\}\) its
+homogeneous dual basis, we use
+\begin{equation}\label{eq:dual-degree-cups}
+ \deg e^a=-\deg e_a,\qquad
+ \ev_n(f\ot y)=f(y),\qquad
+ \coev_n(1)=\sum_a e_a\ot e^a.
+\end{equation}
+The sign in \eqref{eq:dual-right-action} and the use of \(S^{-1}\) are
+forced by the left-dual convention.  With them, \(\ev_n\) and
+\(\coev_n\) are module morphisms and satisfy the two super snake
+identities.
+
+Taking the left categorical dual of the module identification
+\eqref{eq:object} gives, for \(n>0\),
+\begin{equation}\label{eq:negative-object-factorization}
+ \mathcal Y_{-n}
+ \cong (W_{n,\beta}^{\ao})^\vee
+       \boxtimes (L_{n,\beta})^\vee.
+\end{equation}
+This is an identification of modules for the twisted paired double.
+By \eqref{eq:twist-antipode-unchanged}, its left dual agrees with the
+one defined in \eqref{eq:dual-right-action}; no additional twist
+duality gauge is required.  The root factor is the \(4n\)-dimensional
+simple dual module, while the central factor is one-dimensional with
+characters
+\[
+ \mathsf c_1\mapsto 2n(\beta+1),\qquad
+ \mathsf c_2\mapsto-2n\beta.
+\]
+Thus negative colors are obtained by duality, without substituting a
+negative integer into the highest-weight construction of \cref{sec:module}.
+
+For every integer color \(a\), set
+\begin{equation}\label{eq:oriented-objects-charges}
+ U_a=Q^{-2a\beta H_1+2a(\beta+1)H_2}.
+\end{equation}
+Then \(U_{a+b}=U_aU_b\), \(U_{-a}=U_a^{-1}\), and \(U_0=1\).
+For \(n>0\), the inverse charge on \(\mathcal Y_{-n}\) agrees with
+the antipode in \eqref{eq:dual-right-action}.
+If \(x\in\mathcal Y_a\) has bidegree \(p=(p_1,p_2)\), then
+\[
+ x\tri H_1=-p_2x,\qquad x\tri H_2=-p_1x,\qquad
+ x\tri U_b=Q^{-2b(\beta+1)p_1+2b\beta p_2}x.
+\]
+These formulas hold for positive colors by \eqref{eq:Yn-action},
+for negative colors by duality and the negative-degree convention,
+and for zero by the counit action.
+
+Let
+\[
+ \boldsymbol\alpha=(\alpha_1,\ldots,\alpha_r),
+ \qquad
+ \alpha_i\in\mathbb Z,\qquad
+ \mathcal Y_{\boldsymbol\alpha}
+ =\mathcal Y_{\alpha_1}\ot\cdots\ot \mathcal Y_{\alpha_r}.
+\]
+Extend \(\chi\) to nonzero bihomogeneous elements of
+\(\bigoplus_{a\in\mathbb Z}\mathcal Y_a\) by the same formula
+\eqref{eq:chi}, using the negative degrees on the dual from
+\eqref{eq:dual-degree-cups}.  This covers pairs from any two colors;
+parity is still the sum of the two degree coordinates modulo two.  For bihomogeneous
+\(x_i\in \mathcal Y_{\alpha_i}\), define the oriented staircase gauge
+\begin{equation}\label{eq:oriented-staircase}
+\begin{aligned}
+G_{\boldsymbol\alpha}^{\mathrm{or}}
+(x_1\ot\cdots\ot x_r)
+={}&
+\left(\prod_{1\leq i<j\leq r}(-1)^{|x_i||x_j|}\chi(x_j,x_i)\right)\\
+&{}\cdot
+\bigotimes_{i=1}^r
+\left(x_i\tri\prod_{j=i+1}^rU_{\alpha_j}\right).
+\end{aligned}
+\end{equation}
+All charges lie in the same commutative torus, so the products in
+\eqref{eq:oriented-staircase} are unambiguous.  Each gauge is diagonal
+with nonzero powers of \(Q\) as eigenvalues, hence invertible.
+A zero-colored tensor factor contributes no pairwise coefficient or
+charge, so the gauge is compatible with the tensor-unit identifications.
+
+For a right--right super Yetter--Drinfeld module, the checked braiding is
+\begin{equation}\label{eq:YD-braiding}
+ c_n^{\mathrm s}(a\ot b)
+ =\sum(-1)^{|a||b_{(0)}|}
+ b_{(0)}\ot(a\tri b_{(1)}).
+\end{equation}
+For \(y\in\mathcal Y_n\) of bidegree \((a,b)\), define
+\[
+ \varphi_n(y)=Q^{-2n(\beta+1)a+2n\beta b}y=y\tri U_n.
+\]
+The equality follows from \eqref{eq:Yn-action} and \eqref{eq:Un}.
+For the all-positive word \((n,\ldots,n)\), the action on the
+\(i\)-th factor in \eqref{eq:oriented-staircase} is
+\(y_i\tri U_n^{r-i}=\varphi_n^{r-i}(y_i)\), with
+\(\varphi_n^0=\id\).
+
+For \(\alpha,\gamma\in\mathbb Z\), let
+\[
+ c_{\alpha,\gamma}^{\mathrm s}:
+ \mathcal Y_\alpha\ot \mathcal Y_\gamma\longrightarrow \mathcal Y_\gamma\ot \mathcal Y_\alpha
+\]
+be the canonical braiding of the right-module category; in particular,
+\(c_{n,n}^{\mathrm s}=c_n^{\mathrm s}\) for \(n>0\).
+Define the colored \(T\)-crossings by
+\begin{equation}\label{eq:oriented-T-crossing}
+ T_{\alpha,\gamma}
+ =
+ G_{(\gamma,\alpha)}^{\mathrm{or}}\,
+ c_{\alpha,\gamma}^{\mathrm s}\,
+ (G_{(\alpha,\gamma)}^{\mathrm{or}})^{-1}.
+\end{equation}
+For each \(n>0\), \eqref{eq:oriented-T-crossing} includes
+\(T_{n,n}\), \(T_{-n,n}\),
+\(T_{n,-n}\), and \(T_{-n,-n}\).
+The identification \(T_{n,n}=T_n\) with the original
+Garoufalidis--Kashaev operator is verified below.
+
+\begin{proposition}[Oriented braid-groupoid transport]
+\label{prop:oriented-transport}
+For \(r\geq2\) and \(1\leq i<r\), let
+\(s_i\boldsymbol\alpha\) be obtained by exchanging the \(i\)-th and
+\((i+1)\)-st entries.  Then
+\begin{equation}\label{eq:oriented-local-transport}
+ (T_{\boldsymbol\alpha})_i
+ =
+ G_{s_i\boldsymbol\alpha}^{\mathrm{or}}\,
+ (c_{\boldsymbol\alpha}^{\mathrm s})_i\,
+ (G_{\boldsymbol\alpha}^{\mathrm{or}})^{-1}.
+\end{equation}
+Under the identification of \cref{app:GK-conventions},
+\(T_{n,n}=T_n\) for every \(n>0\).  Consequently, the operators in
+\eqref{eq:oriented-T-crossing} extend the Garoufalidis--Kashaev braid
+operators and satisfy the colored oriented braid-groupoid relations.
+Crossings involving color zero are the canonical tensor-unit maps.
+\end{proposition}
+
+\begin{proof}
+We first identify the positive crossing with the original operator.
+
+Let \(a,b\in\mathcal Y_n\) be bihomogeneous.  For the
+\(B_{\hK}\)-action, we use the same symbol \(\tri\) for the
+Garoufalidis--Kashaev twisted right-adjoint action
+\(a\tri h=\lambda_R(a\ot h)\); see \cref{app:GK-action}.  Decompose
+\(\Delta_B(b)=\sum b^{(1)}\ot b^{(2)}\) into bihomogeneous components.
+Expanding \eqref{eq:YD-braiding} using \eqref{eq:Yn-coaction} gives
+\[
+ c_n^{\mathrm s}(a\ot b)
+ =\sum(-1)^{|b^{(2)}|(|b^{(1)}|+|a|)}
+ \chi(b^{(2)},b^{(1)})^{-1}
+ \chi(b^{(1)},a)\chi(b^{(2)},a)\,
+ b^{(1)}\ot(\varphi_n(a)\tri b^{(2)}).
+\]
+To compute the conjugation, first apply
+\[
+ (G_{(n,n)}^{\mathrm{or}})^{-1}(a\ot b)
+ =(-1)^{|a||b|}\chi(b,a)^{-1}
+ \varphi_n^{-1}(a)\ot b.
+\]
+This cancels \(\varphi_n\) in the right-adjoint term above.
+The resulting second tensor factor has degree
+\(\deg a+\deg b^{(2)}\).  Applying \(G_{(n,n)}^{\mathrm{or}}\) therefore
+contributes the scalar
+\[
+ (-1)^{(|a|+|b^{(2)}|)|b^{(1)}|}
+ \chi(a,b^{(1)})\chi(b^{(2)},b^{(1)})
+\]
+and applies \(\varphi_n\) to the first tensor factor.
+Since \(|b|=|b^{(1)}|+|b^{(2)}|\), all parity signs cancel.
+Also,
+\(\chi(b,a)=\chi(b^{(1)},a)\chi(b^{(2)},a)\).
+Thus
+\begin{align*}
+ &G_{(n,n)}^{\mathrm{or}}c_n^{\mathrm s}(G_{(n,n)}^{\mathrm{or}})^{-1}(a\ot b)\\
+ &\quad=
+ \sum\chi(a,b^{(1)})\,
+ \varphi_n(b^{(1)})\ot(a\tri b^{(2)})\\
+ &\quad=T_n(a\ot b),
+\end{align*}
+where the last equality is \eqref{eq:GK-T-Sweedler} under the
+identification of \cref{app:GK-conventions}.
+
+For an arbitrary oriented word, the pairwise coefficients involving
+any other strand cancel because the adjacent braiding preserves the
+total bidegree of its two inputs.  The charge factors cancel as well:
+a charge on a later strand acts on both adjacent inputs through its
+group-like coproduct and commutes through the module braiding, while
+an earlier strand sees the unchanged product
+\(U_{\alpha_i}U_{\alpha_{i+1}}\).
+The remaining factors are exactly the two-strand gauges in
+\eqref{eq:oriented-T-crossing}.  This proves
+\eqref{eq:oriented-local-transport}, including the all-positive case.
+Conjugating the canonical braid relations by the boundary gauges proves
+the braid-groupoid relations.
+\end{proof}
+
+Set \(G_\varnothing^{\mathrm{or}}=\id_{\hK}\).
+For each \(n>0\), use the dual pair \((\mathcal Y_{-n},\mathcal Y_n)\)
+with evaluation and coevaluation from \eqref{eq:dual-degree-cups}.
+Its transported cups and caps are
+\begin{equation}\label{eq:transported-cups}
+\begin{aligned}
+ \ev_n^T&=\ev_n(G_{(-n,n)}^{\mathrm{or}})^{-1},\\
+ \coev_n^T&=G_{(n,-n)}^{\mathrm{or}}\coev_n.
+\end{aligned}
+\end{equation}
+The comparison with standard duality is given in the next subsection.
+
+\subsection{Comparison with standard duality}
+\label{sec:standard-duality}
+
+The equality \(T_{n,n}=T_n\) identifies the positive crossing.
+The mixed crossings, however, use the transported duality maps
+\eqref{eq:transported-cups}.  We now compare them with the standard
+partial transposes used in \cite[Section~2]{GK}.  Throughout this
+comparison \(n>0\), and tensor products of the underlying linear maps
+are ordinary tensor products.
+
+For \(y\) of bidegree \((a,b)\), define
+\[
+ A_n(y)=Q^{2ab-2n(\beta+1)a+2n\beta b}y.
+\]
+Its ordinary dual \(A_n^*\) is even and invertible.  Direct substitution
+in \eqref{eq:oriented-staircase} gives
+\begin{equation}\label{eq:cup-gauge}
+ \ev_n=\ev_n^T((A_n^*)^{-1}\ot\id),\qquad
+ \coev_n=(\id\ot A_n^*)\coev_n^T.
+\end{equation}
+Thus \(A_n^*\) identifies the transported negative object with the
+standard dual of \(\mathcal Y_n\).  The underlying vector space is the
+same; it is the evaluation and coevaluation that differ.
+
+To specify the transpose convention, put \(V=\mathcal Y_n\).
+For a linear map \(f:V\ot V\to V\ot V\), define
+\begin{equation}\label{eq:standard-partial-transpose}
+ \widetilde f
+ =(\ev_n\ot\id_V\ot\id_{V^*})
+ (\id_{V^*}\ot f\ot\id_{V^*})
+ (\id_{V^*}\ot\id_V\ot\coev_n).
+\end{equation}
+Its source is \(V^*\ot V\) and its target is \(V\ot V^*\).
+In an ordinary dual basis this reads
+\[
+ \widetilde f(e^a\ot e_b)
+ =\sum_{c,d}f_{bd}^{ac}\,e_c\ot e^d,
+ \qquad f(e_b\ot e_d)=\sum_{a,c}f_{bd}^{ac}e_a\ot e_c.
+\]
+This is the partial transpose of \cite[Section~2.1]{GK}; no super flip
+is inserted in this contraction.  In particular, the operation is
+linear in \(f\).  Taking an inverse crossing and taking a partial
+transpose are distinct operations.
+
+For the double-negative crossings, bend a second strand, following
+\cite[Section~2, equations~(10)--(11)]{KashaevLong}:
+\[
+ \widetilde{\widetilde f}
+ =(\ev_n\ot\id_{V^*}\ot\id_{V^*})
+ (\id_{V^*}\ot\widetilde f\ot\id_{V^*})
+ (\id_{V^*}\ot\id_{V^*}\ot\coev_n)
+ :V^*\ot V^*\longrightarrow V^*\ot V^*.
+\]
+Here the second contraction uses the source and target of
+\(\widetilde f\) specified above.  Explicitly,
+\[
+ \widetilde{\widetilde f}(e^a\ot e^c)
+ =\sum_{b,d}f_{db}^{ca}\,e^b\ot e^d.
+\]
+Thus this double partial transpose is the full dual with the tensor
+factors reversed; no super flip is inserted.
+
+\begin{lemma}[Comparison of all oriented crossings]
+\label{lem:partial-transpose}
+The positive-positive crossings are \(T_{n,n}^{\pm1}=T_n^{\pm1}\).
+The remaining six crossings satisfy
+\begin{align}
+ \widetilde{T_n^{-1}}
+ &=(\id_V\ot A_n^*)T_{-n,n}
+ ((A_n^*)^{-1}\ot\id_V)
+ ,\label{eq:standard-negative-positive}\\
+ (\widetilde{T_n})^{-1}
+ &=(A_n^*\ot\id_V)T_{n,-n}
+ (\id_V\ot(A_n^*)^{-1})
+ ,
+ \label{eq:standard-positive-negative}\\
+ (\widetilde{T_n^{-1}})^{-1}
+ &=(A_n^*\ot\id_V)T_{-n,n}^{-1}
+ (\id_V\ot(A_n^*)^{-1})
+ ,
+ \label{eq:standard-negative-positive-inverse}\\
+ \widetilde{T_n}
+ &=(\id_V\ot A_n^*)T_{n,-n}^{-1}
+ ((A_n^*)^{-1}\ot\id_V)
+ ,
+ \label{eq:standard-positive-negative-inverse}\\
+ \widetilde{\widetilde{T_n}}
+ &=(A_n^*\ot A_n^*)T_{-n,-n}
+ ((A_n^*)^{-1}\ot(A_n^*)^{-1})
+ ,
+ \label{eq:standard-negative-negative}\\
+ \widetilde{\widetilde{T_n^{-1}}}
+ &=(A_n^*\ot A_n^*)T_{-n,-n}^{-1}
+ ((A_n^*)^{-1}\ot(A_n^*)^{-1})
+ .
+ \label{eq:standard-negative-negative-inverse}
+\end{align}
+In the first and fourth identities the source and target are
+\(V^*\ot V\) and \(V\ot V^*\); in the second and third they are
+\(V\ot V^*\) and \(V^*\ot V\).  The last two are endomorphisms of
+\(V^*\ot V^*\).
+Hence, after changing the negative-edge identification by \(A_n^*\),
+all oriented crossings agree with the standard-duality operators
+prescribed in \cite[Section~2]{GK} and
+\cite[Section~2, equations~(16)--(19)]{KashaevLong}.
+\end{lemma}
+
+\begin{proof}
+First, the transported mate identities may be read using ordinary
+local tensor products for the cup and cap contractions at issue here.
+Indeed, a cup inserts degrees \(p,-p\) and charges \(U_n,U_{-n}\).
+In the pairwise gauge, its coefficients with every external strand
+cancel, since \(\chi\) is multiplicative in the degrees and
+\(U_nU_{-n}=1\).  Only the internal two-strand factor remains,
+which is exactly \(\coev_n^T\); the same argument applies to a cap.
+Consequently, tensoring a local cup or cap with identity maps on
+external factors is compatible with conjugation by the full boundary
+gauges.  Together with \eqref{eq:oriented-local-transport}, this shows
+that each local crossing, cup, or cap is the corresponding canonical
+map conjugated by its input and output boundary gauges.
+These gauges cancel on composition, so the canonical snake and
+braiding evaluation identities give the transported identities using
+ordinary tensor products.
+
+The braiding evaluation identity expresses \(T_{-n,n}\) as the
+contraction \eqref{eq:standard-partial-transpose} of \(T_n^{-1}\),
+with \(\ev_n,\coev_n\) replaced by \(\ev_n^T,\coev_n^T\).
+Substituting \eqref{eq:cup-gauge} into that contraction gives
+\[
+ T_{-n,n}
+ =(\id_V\ot(A_n^*)^{-1})
+ \widetilde{T_n^{-1}}(A_n^*\ot\id_V),
+\]
+which proves \eqref{eq:standard-negative-positive}.
+The other evaluation identity expresses \((T_{n,-n})^{-1}\) as the
+same transported contraction of \(T_n\).  Substitution gives
+\[
+ (T_{n,-n})^{-1}
+ =(\id_V\ot(A_n^*)^{-1})\widetilde{T_n}
+ (A_n^*\ot\id_V).
+\]
+Inverting proves \eqref{eq:standard-positive-negative} and also
+establishes the required invertibility of both partial transposes.
+Taking inverses gives
+\eqref{eq:standard-negative-positive-inverse} and
+\eqref{eq:standard-positive-negative-inverse}.
+
+Bending both strands gives the categorical dual of the positive
+crossing.  The dual of a tensor product reverses its factor order,
+so, in the ordinary dual bases fixed above, this map is exactly
+\(\widetilde{\widetilde{T_n}}\), as the displayed coefficient formula
+shows.  Each negative boundary factor is identified with the
+standard dual by \(A_n^*\), giving
+\eqref{eq:standard-negative-negative}.  Taking its inverse gives
+\eqref{eq:standard-negative-negative-inverse}, since the reversed
+tensor dual commutes with inversion:
+\[
+ \widetilde{\widetilde{T_n^{-1}}}
+ =\bigl(\widetilde{\widetilde{T_n}}\bigr)^{-1}.
+\]
+\end{proof}
+
+For clarity, temporarily write \(J^{\mathrm{tr}}_{T_n}(D)\) for the
+normal long-knot operator computed with the transported crossings and
+cups, and \(J^{\mathrm{GK}}_{T_n}(D)\) for the standard-duality
+state sum of \cite[Section~2.2]{GK}.  Change the identification on
+every negative edge by \(A_n^*\), leaving positive edges unchanged.
+The lemma and \eqref{eq:cup-gauge} convert all local oriented crossings,
+cups, and caps to their standard-duality counterparts.
+On every internal edge the identification and its inverse
+cancel.  Both external edges are positive, so
+\begin{equation}\label{eq:standard-state-sum-comparison}
+ J^{\mathrm{tr}}_{T_n}(D)=J^{\mathrm{GK}}_{T_n}(D).
+\end{equation}
+We henceforth denote this common operator by \(J_{T_n}(D)\).
+This is equality of the assembled operators, not equality of the
+individual mixed-crossing matrices before changing the dual
+identification.
+
+For later use, the same bending argument applies to the root braiding
+\(R'_{n,\beta}\): its standard partial transposes and those of its
+inverse are invertible.  For any nonzero scalar \(\mu\), linearity and
+inversion give
+\[
+ \widetilde{\mu R}=\mu\widetilde R,\qquad
+ \widetilde{(\mu R)^{-1}}=\mu^{-1}\widetilde{R^{-1}},\qquad
+ (\widetilde{\mu R})^{-1}=\mu^{-1}(\widetilde R)^{-1}.
+\]
+The inverse scalar in a mixed crossing therefore comes from taking
+an inverse, not from partial transpose itself.
+
+\section{Long-knot transport and the Links--Gould comparison}
+\label{sec:LG}
+
+\subsection{Compatibility with the root--center twist}
+\label{sec:oriented-root-center}
+
+The preceding gauge connects \(T_n\) with the untwisted braiding.  We now
+include the tensorator of \(\mathcal F_{\rc}\) on the same oriented words.
+If \(x\in \mathcal Y_\alpha\) has bidegree \(p=(p_1,p_2)\), then
+\begin{equation}\label{eq:oriented-Cartan-weights}
+\begin{aligned}
+ x\tri\mathsf h_1
+ &=(\alpha(\beta+1)-p_2)x,&
+ x\tri\mathsf h_2
+ &=(-\alpha\beta-p_1)x,\\
+ x\tri\mathsf c_1
+ &=-2\alpha(\beta+1)x,&
+ x\tri\mathsf c_2
+ &=2\alpha\beta x.
+\end{aligned}
+\end{equation}
+For \(\alpha,\gamma\in\mathbb Z\), define
+\begin{equation}\label{eq:oriented-F-exponent}
+\begin{aligned}
+\Gamma_{\alpha\mid\gamma}(p,q)
+=\frac12\bigl[
+&\gamma((\beta+1)p_1-\beta p_2)\\
+&+\alpha(\beta q_2-(\beta+1)q_1)
+\bigr].
+\end{aligned}
+\end{equation}
+Let \(\mathcal F_{\rc}^{[r]}\) be the coherent \(r\)-fold tensorator of
+the normalized twist and put
+\begin{equation}\label{eq:oriented-F-tensorator}
+ \mathsf F_{\boldsymbol\alpha}^{\mathrm{or}}
+ =
+ \rho_{\mathcal Y_{\boldsymbol\alpha}}(\mathcal F_{\rc}^{[r]}).
+\end{equation}
+Equations \eqref{eq:Frc} and \eqref{eq:oriented-Cartan-weights} give the
+explicit diagonal action
+\begin{equation}\label{eq:oriented-F-action}
+\mathsf F_{\boldsymbol\alpha}^{\mathrm{or}}
+(x_1\ot\cdots\ot x_r)
+=
+Q^{\sum_{i<j}
+\Gamma_{\alpha_i\mid\alpha_j}(p_i,p_j)}
+x_1\ot\cdots\ot x_r.
+\end{equation}
+The negative-color signs in this formula come from categorical duality,
+not from an additional convention.
+
+Let \((c_{\boldsymbol\alpha}^{\rc})_i\) be the braiding of the twisted
+paired double.  Monoidal transport under a Drinfeld twist gives
+\begin{equation}\label{eq:oriented-twisted-braiding}
+ (c_{\boldsymbol\alpha}^{\rc})_i
+ =
+ (\mathsf F_{s_i\boldsymbol\alpha}^{\mathrm{or}})^{-1}
+ (c_{\boldsymbol\alpha}^{\mathrm s})_i
+ \mathsf F_{\boldsymbol\alpha}^{\mathrm{or}}.
+\end{equation}
+Define the combined gauge
+\begin{equation}\label{eq:combined-oriented-gauge}
+ \mathsf G_{\boldsymbol\alpha}^{\rc,\mathrm{or}}
+ =
+ G_{\boldsymbol\alpha}^{\mathrm{or}}
+ \mathsf F_{\boldsymbol\alpha}^{\mathrm{or}}.
+\end{equation}
+Substitution in \eqref{eq:oriented-local-transport} yields
+\begin{equation}\label{eq:oriented-combined-transport}
+ (T_{\boldsymbol\alpha})_i
+ =
+ \mathsf G_{s_i\boldsymbol\alpha}^{\rc,\mathrm{or}}
+ (c_{\boldsymbol\alpha}^{\rc})_i
+ (\mathsf G_{\boldsymbol\alpha}^{\rc,\mathrm{or}})^{-1}.
+\end{equation}
+This formula relates the integer-colored \(T\)-crossings to the
+braiding of the twisted paired double through the combined gauge.
+
+For each \(n>0\), the twist leaves the standard evaluation and
+coevaluation unchanged:
+\begin{equation}\label{eq:root-center-cups}
+ \ev_n\mathsf F_{(-n,n)}^{\mathrm{or}}=\ev_n,\qquad
+ (\mathsf F_{(n,-n)}^{\mathrm{or}})^{-1}\coev_n=\coev_n.
+\end{equation}
+Indeed, their paired degrees give
+\(\Gamma_{-n\mid n}(-p,p)=\Gamma_{n\mid -n}(p,-p)=0\),
+in agreement with \eqref{eq:twist-antipode-unchanged}.
+Using \eqref{eq:combined-oriented-gauge} and
+\eqref{eq:transported-cups}, the combined gauge therefore satisfies
+\begin{align}
+ \ev_n(\mathsf G_{(-n,n)}^{\rc,\mathrm{or}})^{-1}
+ &=\ev_n^T,\label{eq:root-center-evaluation-cancels}\\
+ \mathsf G_{(n,-n)}^{\rc,\mathrm{or}}\coev_n
+ &=\coev_n^T.\label{eq:root-center-coevaluation-cancels}
+\end{align}
+These identities provide the local crossing, cup, and cap comparisons
+needed for long-knot transport.
+
+\subsection{The normal long-knot operator}
+
+Let \(D\) be a normal long-knot diagram and let \(J_R(D)\) be its
+endomorphism-valued state sum using standard duality as in
+\cite[Section~2]{GK}.  For \(R=T_n\), its agreement with the
+transported construction is \eqref{eq:standard-state-sum-comparison}.
+Composing the local comparison
+at every crossing, cup, and cap gives the following global statement.
+
+\begin{theorem}[Long-knot transport]\label{thm:rigid}
+For every normal long-knot diagram \(D\),
+\begin{equation}\label{eq:long-transport}
+ \Phi_nJ_{T_n}(D)\Phi_n^{-1}
+ =
+ (\lambda_{n,\beta}^{\cen})^{\Writhe(D)}
+ J_{R'_{n,\beta}}(D).
+\end{equation}
+In particular, the two operators are conjugate whenever \(D\) is
+balanced, that is, \(\Writhe(D)=0\).
+\end{theorem}
+
+\begin{proof}
+By \cref{lem:partial-transpose},
+\eqref{eq:standard-state-sum-comparison}, and the combined local
+transport identities above, the boundary gauges cancel when the
+elementary pieces of \(D\) are composed.  The remaining external
+identification is \(\Phi_n\).  Root--center factorization contributes
+\(\lambda_{n,\beta}^{\cen}\) at each positive crossing and its inverse
+at each negative crossing, by the scalar rules in
+\cref{sec:standard-duality}.  Their product is
+\((\lambda_{n,\beta}^{\cen})^{\Writhe(D)}\), proving the formula.
+\end{proof}
+
+\subsection{Balanced representatives}
+
+For the knot comparison below, choose a balanced normal diagram \(D\)
+representing \(\mathcal K\).  Such a representative is obtained by
+composing a normal diagram with Kashaev's correction
+\(\xi^{-\Writhe(D)/2}\): normal diagrams have even writhe and
+\(\Writhe(\xi^k)=2k\)
+\cite[Section~1, Remark~3, and Section~2, Theorem~1]{KashaevLong}.
+The state sum on this corrected diagram is the normalized knot operator.
+In the remainder of this section, \(D\) denotes a balanced normal
+representative, so the central scalar in \cref{thm:rigid} is one.
+
+\subsection{Scalarity}
+
+The operator \(J_{R'_{n,\beta}}(D)\) is an even
+\(U_\hbar^{\Pi_{\ao}}(\mathfrak{sl}(2|1))\)-module endomorphism of
+\(W_{n,\beta}^{\ao}\): braidings, their inverses, cups, caps, tensor
+products, and compositions are all module morphisms.
+
+\begin{proposition}\label{prop:Schur}
+\[
+ \End_{U_\hbar^{\Pi_{\ao}}(\mathfrak{sl}(2|1))}
+ (W_{n,\beta}^{\ao})
+ =\hK\,\id.
+\]
+Consequently, there is a unique scalar
+\(LG'_{n,\mathcal K}(Q^{n\beta},Q)\) such that
+\[
+ J_{R'_{n,\beta}}(D)
+ =LG'_{n,\mathcal K}(Q^{n\beta},Q)\id.
+\]
+\end{proposition}
+
+\begin{proof}
+An endomorphism sends the one-dimensional highest-weight space to itself.
+It therefore acts on \(w_{n,\beta}\) by a scalar.  Since
+\(W_{n,\beta}^{\ao}\) is generated by \(w_{n,\beta}\), the same scalar
+acts on the whole module.
+\end{proof}
+
+Combining \cref{thm:rigid,prop:Schur}, and recalling that
+\(V_{n,\mathcal K}\) is the \((1,1)\)-entry of \(J_{T_n}(D)\), gives
+\begin{equation}\label{eq:V-LGprime}
+ V_{n,\mathcal K}(Q^{2n\beta+n},Q^2)
+ =LG'_{n,\mathcal K}(Q^{n\beta},Q).
+\end{equation}
+In fact, the argument proves the stronger scalar identity
+\[
+ J_{T_n}(D)
+ =LG'_{n,\mathcal K}(Q^{n\beta},Q)\id_{\mathcal Y_n}
+\]
+for balanced normal diagrams.  Thus scalarity is a theorem rather than
+an input.
+
+\subsection{Comparison with standard Links--Gould conventions}
+
+It remains to compare the root-module scalar with the standard
+Links--Gould normalization.
+
+\begin{theorem}\label{thm:standard-comparison}
+For every oriented knot \(\mathcal K\),
+\begin{equation}\label{eq:LGprime-standard}
+ LG'_{n,\mathcal K}(Q^{n\beta},Q)
+ =
+ LG_{\mathcal K}^{(n)}(Q^{-n\beta},Q^{-1})
+ =
+ LG_{\overline{\mathcal K}}^{(n)}(Q^{n\beta},Q).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The odd reflection \eqref{eq:odd-reflection-object} identifies the
+coloring object with \(\Pi V_0(n-1,n\beta)\).  Independence of the
+Drinfeld--Jimbo quantization from the simple-root system, together with
+the quantum-group/Kontsevich comparison, identifies the corresponding
+normalized rigid-tangle scalars \cite{GeerCartan,GeerKontsevich}.
+The parity shift contributes only a writhe factor, which is one on the
+balanced representatives used here.
+
+Standard Links--Gould conventions use left modules with braiding
+\(\tau^{\mathrm s}(\pi\ot\pi)(\mathcal R)\), whereas
+\eqref{eq:right-braiding} uses \(\mathcal R^{-1}\).  The right-to-left
+conversion therefore reverses the crossings, producing the simultaneous
+substitutions \((Q^{n\beta},Q)\mapsto(Q^{-n\beta},Q^{-1})\), or,
+equivalently, taking the mirror with parameters fixed.  This convention
+is uniform in \(n\) and agrees with
+\cite[Theorem~1.5]{ColoredLG}, proving \eqref{eq:LGprime-standard}.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:main}]
+Substitute \eqref{eq:LGprime-standard} into \eqref{eq:V-LGprime}.
+The scalar-identity assertion follows from \cref{prop:Schur}.
+\end{proof}
+
+\subsection{Concluding remarks}
+
+The staircase gauge identifies the Nichols braid operator with the
+super Yetter--Drinfeld braiding, while the root--center twist separates
+the quantum-group contribution from the scalar
+\(Q^{2n^2\beta(\beta+1)}\).  Balanced normalization removes this scalar.
+The remaining long-knot operator acts on a simple typical module, so its
+\((1,1)\)-entry determines the entire operator.
+
+\appendix
+
+\section*{Appendices}
+\phantomsection
+\addcontentsline{toc}{section}{Appendices}
+
+\section{Comparison with the Garoufalidis--Kashaev conventions}
+\label{app:GK-conventions}
+
+We record the parameter and action conventions relating our construction
+to \cite[Theorem~3.6 and Definition~7.5]{GK}.
+
+\subsection{Parameters and the space \texorpdfstring{\(Y_n\)}{Yn}}
+\label{app:GK-parameters}
+
+To distinguish the notation of \cite{GK} from ours, add a superscript
+\({\rm GK}\) to its parameters.  The required specialization is
+\begin{equation}\label{eq:GK-dictionary}
+ q^{\rm GK}=Q^2,\qquad
+ q_{12}^{\rm GK}=q_{21}^{\rm GK}=-Q,\qquad
+ t^{\rm GK}=Q^{2n\beta+n}=t.
+\end{equation}
+Indeed, the diagonal braiding determined by
+\(q_{11}^{\rm GK}=q_{22}^{\rm GK}=-1\) and
+\(q_{12}^{\rm GK}=q_{21}^{\rm GK}=-Q\) is exactly the braiding
+\(\tau_\chi\) determined by \eqref{eq:chi}.  The parametrization following
+\cite[Proposition~7.4]{GK} therefore gives
+\begin{equation}\label{eq:GK-t1-t2}
+ \begin{aligned}
+ t_1^{\rm GK}
+ &=\frac{1}{(q^{\rm GK})^{n/2}t^{\rm GK}}
+   =Q^{-2n(\beta+1)},\\
+ t_2^{\rm GK}
+ &=\frac{t^{\rm GK}}{(q^{\rm GK})^{n/2}}
+   =Q^{2n\beta}.
+ \end{aligned}
+\end{equation}
+In particular, \(t_1^{\rm GK}t_2^{\rm GK}(q^{\rm GK})^n=1\).
+The coefficient of the invariant vector in \cite[(110)--(113)]{GK} is
+\begin{equation}\label{eq:GK-alpha}
+ \alpha^{\rm GK}=t_2^{\rm GK}(-q_{12}^{\rm GK})^n
+ =Q^{2n\beta+n}=t.
+\end{equation}
+Consequently,
+\[
+ v_{n,\alpha^{\rm GK}}=(x_1x_2)^n+\alpha^{\rm GK}(x_2x_1)^n=v_n,
+\]
+and the basis in \cite[Proposition~7.4]{GK} becomes exactly the basis
+\eqref{eq:Yn-basis}.  Thus, after the specialization
+\eqref{eq:GK-dictionary} and extension of scalars to \(\hK\), there is a
+canonical identification
+\begin{equation}\label{eq:GK-space-identification}
+ Y_n^{\rm GK}\otimes_{\mathbb F}\hK\cong\mathcal Y_n
+\end{equation}
+inside \(B_{\hK}\).  Since \(Q=e^\hbar\), the parameter \(q^{\rm GK}=Q^2\)
+is not a root of unity in the formal setting.  Moreover,
+\(\beta\ne-1,0\) gives respectively
+\(t_1^{\rm GK}\ne1\) and \(t_2^{\rm GK}\ne1\), so the hypotheses of
+\cite[Proposition~7.4]{GK} hold.
+
+\subsection{The right action and the original definition of
+\texorpdfstring{\(T_n\)}{Tn}}
+\label{app:GK-action}
+
+The map \(\varphi_n\) used in \cref{sec:oriented-fixed-color} is the restriction of the
+scaling automorphism of the braided Hopf algebra \(B_{\hK}\) determined by
+\begin{equation}\label{eq:GK-scaling}
+ \varphi_n(x_1)=Q^{-2n(\beta+1)}x_1,\qquad
+ \varphi_n(x_2)=Q^{2n\beta}x_2.
+\end{equation}
+We also write
+\[
+ a\tri h=\lambda_R(a\ot h),\qquad a,h\in B_{\hK},
+\]
+for the twisted right-adjoint action of \cite[Theorem~3.5]{GK}.
+Its restriction to \(\mathcal Y_n\) agrees with the action above
+when the acting element belongs to \(B_{\hK}\); Cartan and paired-double
+actions retain their previously specified domains.
+On the generators it is
+\begin{equation}\label{eq:GK-right-action}
+\begin{aligned}
+ a\tri x_1&=ax_1-Q^{-2n(\beta+1)}\chi(a,x_1)x_1a,\\
+ a\tri x_2&=ax_2-Q^{2n\beta}\chi(a,x_2)x_2a,
+\end{aligned}
+\end{equation}
+which is precisely the restriction used in \eqref{eq:Yn-action}.
+
+Under \eqref{eq:GK-space-identification}, the operator called \(T_n\) in
+\cite[Theorem~3.6 and Definition~7.5]{GK} is
+\begin{equation}\label{eq:GK-T-definition}
+ T_n^{\rm GK}
+ =
+ (\varphi_n\ot\lambda_R)
+ (\tau_\chi\ot\id)
+ (\id\ot\Delta_B)
+ \big|_{\mathcal Y_n\ot\mathcal Y_n}.
+\end{equation}
+Thus, if \(a,b\) are bihomogeneous and
+\[
+ \Delta_B(b)=\sum b^{(1)}\ot b^{(2)}
+ \quad\text{in bihomogeneous components},
+\]
+then
+\begin{equation}\label{eq:GK-T-Sweedler}
+ T_n^{\rm GK}(a\ot b)
+ =\sum \chi(a,b^{(1)})\,
+ \varphi_n(b^{(1)})\ot(a\tri b^{(2)}).
+\end{equation}
+This fixes both the tensor order and the right-action convention.
+
+\subsection{Parameter dictionary}
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Symbol & Meaning & Relation\\
+\midrule
+\(Q\) & formal quantum parameter & \(Q=e^\hbar\)\\
+\(\beta\) & highest-weight parameter & \(\beta\neq0,-1\)\\
+\(\alpha\) & standard Links--Gould weight & \(\alpha=n\beta\)\\
+\(t\) & first \(V_n\)-parameter & \(t=Q^{2n\beta+n}\)\\
+\(q\) & second \(V_n\)-parameter & \(q=Q^2\)\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{First root degrees of the canonical tensor}
+
+For reference, the inverses of the pairing matrices are
+\[
+\begin{aligned}
+ M_{2r+1}^{-1}&=\frac{(-1)^r}{P_r(Q)}I_2,\\
+ M_{2r}^{-1}&=\frac{(-1)^r}{P_r(Q)}
+ \begin{pmatrix}1&Q^{-r}\\Q^{-r}&1\end{pmatrix}.
+\end{aligned}
+\]
+The super right-dual convention multiplies degree \(m\) by \((-1)^m\).
+Thus the signed root coevaluation begins with
+\[
+ 1-x_1\ot F_1-x_2\ot F_2+\text{terms of root degree at least two}.
+\]
+Its inverse, the standard root factor of the universal \(R\)-matrix,
+begins with
+\[
+ 1+x_1\ot F_1+x_2\ot F_2+\text{terms of root degree at least two}.
+\]
+These signs are forced simultaneously by the right-dual evaluation and
+the cross relation \(x_iF_i+F_ix_i=Q^{H_i}-Q^{\widehat H_i}\).
+
+\section*{Acknowledgments}
+\phantomsection
+\addcontentsline{toc}{section}{Acknowledgments}
+
+The author is deeply grateful to his advisor, Nicolai Reshetikhin, for
+carefully reviewing this article, offering valuable suggestions, and providing
+encouragement and support.  He also warmly thanks his family, friends, and
+partner for standing by him during times of discouragement.
+
+The author used \texttt{gpt5.6sol} to obtain the key ideas of the proof,
+and used \texttt{gpt5.6sol} and \texttt{gpt6.1sol} in repeated rounds of
+revision and polishing to make the exposition readable.  He also thanks
+Hanwen Quan for advice on the use of AI.  The author takes full
+responsibility for the content and for any remaining errors.
+
+\begin{thebibliography}{99}
+\raggedright
+
+\bibitem{DeWitKauffmanLinks}
+D.~De Wit, L.~H.~Kauffman, and J.~R.~Links,
+\newblock On the Links--Gould invariant of links,
+\newblock \emph{J. Knot Theory Ramifications} \textbf{8} (1999), no.~2,
+165--199,
+\newblock \href{https://doi.org/10.1142/S0218216599000110}
+{doi:10.1142/S0218216599000110}.
+
+\bibitem{ReshetikhinTuraev}
+N.~Yu.~Reshetikhin and V.~G.~Turaev,
+\newblock Ribbon graphs and their invariants derived from quantum groups,
+\newblock \emph{Comm. Math. Phys.} \textbf{127} (1990), no.~1, 1--26,
+\newblock \href{https://doi.org/10.1007/BF02096491}
+{doi:10.1007/BF02096491}.
+
+\bibitem{Kac}
+V.~G.~Kac,
+\newblock Lie superalgebras,
+\newblock \emph{Adv. Math.} \textbf{26} (1977), no.~1, 8--96,
+\newblock \href{https://doi.org/10.1016/0001-8708(77)90017-2}
+{doi:10.1016/0001-8708(77)90017-2}.
+
+\bibitem{Serganova}
+V.~Serganova,
+\newblock On generalizations of root systems,
+\newblock \emph{Comm. Algebra} \textbf{24} (1996), no.~13, 4281--4299,
+\newblock \href{https://doi.org/10.1080/00927879608825814}
+{doi:10.1080/00927879608825814}.
+
+\bibitem{Yamane}
+H.~Yamane,
+\newblock Quantized enveloping algebras associated with simple Lie
+superalgebras and their universal \(R\)-matrices,
+\newblock \emph{Publ. Res. Inst. Math. Sci.} \textbf{30} (1994), no.~1,
+15--87,
+\newblock \href{https://doi.org/10.2977/PRIMS/1195166275}
+{doi:10.2977/PRIMS/1195166275}.
+
+\bibitem{GK}
+S.~Garoufalidis and R.~Kashaev,
+\newblock Multivariable knot polynomials from braided Hopf algebras with
+automorphisms,
+\newblock \emph{Publ. Res. Inst. Math. Sci.} \textbf{62} (2026), 75--114,
+\newblock \href{https://doi.org/10.4171/PRIMS/62-1-3}
+{doi:10.4171/PRIMS/62-1-3}.
+
+\bibitem{KashaevLong}
+R.~Kashaev,
+\newblock Invariants of long knots,
+\newblock in \emph{Representation Theory, Mathematical Physics, and
+Integrable Systems}, Progress in Mathematics \textbf{340},
+Birkh\"auser, Cham, 2021, 431--451,
+\newblock \href{https://arxiv.org/abs/1908.00118}{arXiv:1908.00118}.
+
+\bibitem{ColoredLG}
+S.~Garoufalidis, M.~Harper, R.~Kashaev, B.-M.~Kohli, and E.~Wagner,
+\newblock On the colored Links--Gould polynomial,
+\newblock arXiv:2509.10911, 2025,
+\newblock \url{https://arxiv.org/abs/2509.10911}.
+
+\bibitem{GeerCartan}
+N.~Geer,
+\newblock Some remarks on quantized Lie superalgebras of classical type,
+\newblock \emph{J. Algebra} \textbf{314} (2007), no.~2, 565--580,
+\newblock \href{https://doi.org/10.1016/j.jalgebra.2006.10.045}
+{doi:10.1016/j.jalgebra.2006.10.045}.
+
+\bibitem{GeerEK}
+N.~Geer,
+\newblock Etingof--Kazhdan quantization of Lie superbialgebras,
+\newblock \emph{Adv. Math.} \textbf{207} (2006), no.~1, 1--38,
+\newblock \href{https://doi.org/10.1016/j.aim.2005.11.005}
+{doi:10.1016/j.aim.2005.11.005}.
+
+\bibitem{GeerKontsevich}
+N.~Geer,
+\newblock The Kontsevich integral and quantized Lie superalgebras,
+\newblock \emph{Algebr. Geom. Topol.} \textbf{5} (2005), 1111--1139,
+\newblock \href{https://doi.org/10.2140/agt.2005.5.1111}
+{doi:10.2140/agt.2005.5.1111}.
+
+\bibitem{GeerPatureau}
+N.~Geer and B.~Patureau--Mirand,
+\newblock Multivariable link invariants arising from
+\(\mathfrak{sl}(2|1)\) and the Alexander polynomial,
+\newblock \emph{J. Pure Appl. Algebra} \textbf{210} (2007), no.~1,
+283--298,
+\newblock \url{https://arxiv.org/abs/math/0601291}.
+
+\end{thebibliography}
+
+\end{document}
